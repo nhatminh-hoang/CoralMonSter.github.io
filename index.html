@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="CoralMonSter: Coral Image Momentum Segmenter">
+  <meta name="description"
+    content="CoralMonSter is a premium, prompt-free coral reef segmentation framework leveraging Teacher-Student Distillation and Learnable Class Tokens for state-of-the-art semantic segmentation.">
+  <meta name="keywords"
+    content="CoralMonSter, Coral Segmentation, Semantic Segmentation, Momentum Distillation, Segment Anything, Computer Vision, Marine Ecology">
+  <meta name="author" content="Nhat Minh Hoang">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="CoralMonSter Project">
+  <meta property="og:title" content="CoralMonSter: Coral Image Momentum Segmenter">
+  <meta property="og:description"
+    content="CoralMonSter is a premium, prompt-free coral reef segmentation framework leveraging Teacher-Student Distillation and Learnable Class Tokens.">
+  <meta property="og:url" content="https://nhatminh-hoang.github.io/CoralMonSter/">
+  <meta property="og:image" content="static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CoralMonSter - Coral Image Momentum Segmenter">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Nhat Minh Hoang">
+  <meta property="article:section" content="Computer Vision">
+  <meta property="article:tag" content="Semantic Segmentation">
+  <meta property="article:tag" content="Coral Reefs">
+
+
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="CoralMonSter: Coral Image Momentum Segmenter">
+  <meta name="citation_author" content="Hoang, Nhat Minh">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="Preprint">
+  <meta name="citation_pdf_url" content="static/pdfs/CoralMonSter_preprint.pdf">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>CoralMonSter: Coral Image Momentum Segmenter</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "CoralMonSter: Coral Image Momentum Segmenter",
+    "description": "CoralMonSter is a premium, prompt-free coral reef segmentation framework built on top of Segment Anything (SAM).",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Nhat Minh Hoang",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Independent Researcher"
+        }
+      }
+    ],
+    "datePublished": "2024",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Preprint"
+    },
+    "url": "https://nhatminh-hoang.github.io/CoralMonSter/",
+    "keywords": ["Coral Segmentation", "Semantic Segmentation", "SAM", "Distillation"],
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://nhatminh-hoang.github.io/CoralMonSter/"
+    }
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CoralMonSter Research",
+    "url": "https://github.com/nhatminh-hoang/CoralMonSter",
+    "logo": "static/images/favicon.ico"
+  }
+  </script>
+</head>
+
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <!-- TODO: Replace with your lab's related works -->
+        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
+          <div class="work-info">
+            <!-- TODO: Replace with actual paper title -->
+            <h5>Paper Title 1</h5>
+            <!-- TODO: Replace with brief description -->
+            <p>Brief description of the work and its main contribution.</p>
+            <!-- TODO: Replace with venue and year -->
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <!-- TODO: Add more related works or remove extra items -->
+        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 2</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 3</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">CoralMonSter: Coral Image Momentum Segmenter</h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="#" target="_blank">Nhat-Minh Hoang</a><sup>1,†</sup>,</span>
+                <span class="author-block">
+                  <a href="#" target="_blank">Hoang-Dieu Vu</a><sup>1,†</sup>,</span>
+                <span class="author-block">
+                  <a href="#" target="_blank">Thien-Van Luong</a><sup>2</sup>,</span>
+                <span class="author-block">
+                  <a href="#" target="_blank">Dzung Van Dinh</a><sup>3,4</sup>,</span>
+                <span class="author-block">
+                  <a href="#" target="_blank">Manh-Duong Phung</a><sup>3,5</sup>,</span>
+                <span class="author-block">
+                  <a href="#" target="_blank">Cuong Do-Danh</a><sup>3,5</sup>,</span>
+                <span class="author-block">
+                  <a href="mailto:hieu.ph@vinuni.edu.vn" target="_blank">Huy-Hieu Pham</a><sup>3,5,6,*</sup></span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>Phenikaa University, <sup>2</sup>National Economics University,
+                  <sup>3</sup>VinUniversity</span>
+                <span class="author-block"><sup>4</sup>Vietnam National University Hanoi, <sup>5</sup>College of
+                  Engineering & Computer Science, <sup>6</sup>VinUni-Illinois Smart Health Center</span>
+                <span class="eql-cntrb"><small><br><sup>†</sup>Equal Contribution, <sup>*</sup>Corresponding
+                    Author</small></span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a href="static/pdfs/CoralMonSter_preprint.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+
+                  <!-- Code Link -->
+                  <span class="link-block">
+                    <a href="https://github.com/nhatminh-hoang/CoralMonSter" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Teaser video-->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <!-- TODO: Replace with your teaser video -->
+          <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
+            <!-- TODO: Add your video file path here -->
+            <source src="static/videos/banner_video.mp4" type="video/mp4">
+          </video>
+          <!-- TODO: Replace with your video description -->
+          <h2 class="subtitle has-text-centered">
+            CoralMonSter bridges the gap between SAM's class-agnostic segmentation and the need for semantic
+            understanding in coral ecology, achieving state-of-the-art results on HKCoral benchmark.
+          </h2>
+        </div>
+      </div>
+    </section>
+    <!-- End teaser video -->
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <!-- TODO: Replace with your paper abstract -->
+              <p>
+                <strong>CoralMonSter</strong> is a premium, prompt-free coral reef segmentation framework built on top
+                of Segment Anything (SAM). It leverages a novel <strong>Teacher-Student Distillation</strong>
+                architecture and <strong>Learnable Class Tokens</strong> to achieve state-of-the-art semantic
+                segmentation without requiring user prompts.
+              </p>
+              <p>
+                By introducing a <strong>Semantic Query Decoder (SQD)</strong> and a <strong>Momentum
+                  Distillation</strong> framework, CoralMonSter effectively bridges the gap between SAM's class-agnostic
+                segmentation and the need for semantic understanding in coral ecology. Our method achieves
+                <strong>57.28% mIoU</strong> on the HKCoral benchmark, significantly outperforming frozen baselines.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+
+
+    <!-- Image carousel -->
+    <!--
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          First image description.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          Second image description.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+         Third image description.
+       </h2>
+     </div>
+     <div class="item">
+      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
+      <h2 class="subtitle has-text-centered">
+        Fourth image description.
+      </h2>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+-->
+    <!-- End image carousel -->
+
+
+
+
+    <!-- Youtube video -->
+    <!--
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+    <!-- End youtube video -->
+
+    <!-- Method Section -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Methodology</h2>
+            <div class="content has-text-justified">
+              <p>
+                We introduce <strong>CoralMonSter</strong>, a unified framework that adapts SAM into a fully automatic,
+                class-aware semantic segmentation model.
+                It incorporates a novel <strong>Semantic Query Decoder (SQD)</strong> that replaces user prompts with
+                learnable class-specific queries.
+                The model is trained using a <strong>Momentum Distillation</strong> strategy, in which an Exponential
+                Moving Average (EMA) teacher provides prompt-based guidance derived from ground-truth annotations.
+              </p>
+              <img src="static/images/framework_architecture.png" alt="CoralMonSter Architecture"
+                class="publication-image" />
+              <p class="is-size-6">
+                <strong>Proposed CoralMonSter framework.</strong> The architecture consists of an Image Encoder
+                initialized from SAM.
+                We introduce a dual-decoder distillation setup: a prompt-free Student Decoder and a privileged Teacher
+                Decoder.
+                The Teacher receives privileged ground-truth prompts to generate high-fidelity oracle masks, which the
+                Student learns to mimic via Mask and Token Distillation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Method Section -->
+
+    <!-- Results Section -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Experimental Results</h2>
+            <div class="content has-text-justified">
+              <p>
+                CoralMonSter achieves state-of-the-art performance on the HKCoral and CoralScapes datasets.
+                It significantly outperforms fully supervised segmenters (Mask2Former, SegFormer) and existing SAM-based
+                adaptations (CoralSCOP).
+                Notably, our prompt-free model surpasses even the 2-point prompted versions of baseline models.
+              </p>
+
+              <h4 class="title is-4 has-text-centered">Overall Performance Comparison</h4>
+              <div class="table-container">
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Method</th>
+                      <th colspan="2">HKCoral</th>
+                      <th colspan="2">CoralScapes</th>
+                    </tr>
+                    <tr>
+                      <th>IoU</th>
+                      <th>Pixel Acc</th>
+                      <th>IoU</th>
+                      <th>Pixel Acc</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Mask2Former (Swin-B)</td>
+                      <td>50.03</td>
+                      <td>91.12</td>
+                      <td>31.38</td>
+                      <td>65.64</td>
+                    </tr>
+                    <tr>
+                      <td>SegFormer (MiT-B5)</td>
+                      <td>46.74</td>
+                      <td>90.73</td>
+                      <td>17.69</td>
+                      <td>66.80</td>
+                    </tr>
+                    <tr>
+                      <td>SAM (No prompt)</td>
+                      <td>26.39</td>
+                      <td>-</td>
+                      <td>30.43</td>
+                      <td>-</td>
+                    </tr>
+                    <tr>
+                      <td>CoralSCOP (No prompt)</td>
+                      <td>12.30</td>
+                      <td>55.78</td>
+                      <td>14.01</td>
+                      <td>18.87</td>
+                    </tr>
+                    <tr>
+                      <td><strong>CoralMonSter (Ours)</strong></td>
+                      <td><strong>57.28</strong></td>
+                      <td><strong>91.77</strong></td>
+                      <td><strong>38.76</strong></td>
+                      <td><strong>71.87</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <br />
+              <img src="static/images/qualitative_results.png" alt="Qualitative Results" class="publication-image" />
+              <p class="is-size-6">
+                <strong>Qualitative Analysis.</strong> CoralMonSter generates clean, coherent masks that closely align
+                with the ground truth without any manual prompts, significantly outperforming CoralSCOP in both
+                prompt-free and prompt-guided settings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Results Section -->
+
+
+    <!-- Video carousel -->
+    <!--
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Another Carousel</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
+            <source src="static/videos/carousel1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
+            <source src="static/videos/carousel2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video3">
+          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
+            <source src="static/videos/carousel3.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+    <!-- End video carousel -->
+
+
+
+
+
+
+    <!-- Paper poster -->
+    <!--
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Poster</h2>
+
+          <iframe src="static/pdfs/CoralMonSter_preprint.pdf" width="100%" height="550">
+          </iframe>
+
+        </div>
+      </div>
+    </section>
+    -->
+    <!--End paper poster -->
+
+
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@article{Hoang2024CoralMonSter,
+  title={CoralMonSter: Prompt-Free Segment Anything via Momentum Distillation for Automated Coral Reef Monitoring},
+  author={Hoang, Nhat-Minh and Vu, Hoang-Dieu and Luong, Thien-Van and Dinh, Dzung Van and Phung, Manh-Duong and Do-Danh, Cuong and Pham, Huy-Hieu},
+  journal={Preprint},
+  year={2024},
+  url={https://github.com/nhatminh-hoang/CoralMonSter}
+}</code></pre>
+      </div>
+    </section>
+    <!--End BibTex citation -->
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+
+              <p>
+                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                  href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                 <br> This website is licensed under a <a rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
