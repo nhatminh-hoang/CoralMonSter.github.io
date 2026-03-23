@@ -22,7 +22,7 @@
   <meta property="og:description"
     content="CoralMonSter is a premium, prompt-free coral reef segmentation framework leveraging Teacher-Student Distillation and Learnable Class Tokens.">
   <meta property="og:url" content="https://nhatminh-hoang.github.io/CoralMonSter/">
-  <meta property="og:image" content="static/images/social_preview.png">
+  <meta property="og:image" content="static/images/logo.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="CoralMonSter - Coral Image Momentum Segmenter">
@@ -58,8 +58,8 @@
   <title>CoralMonSter: Coral Image Momentum Segmenter</title>
 
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/png" href="static/images/logo.png">
+  <link rel="apple-touch-icon" href="static/images/logo.png">
 
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -133,7 +133,7 @@
     "@type": "Organization",
     "name": "CoralMonSter Research",
     "url": "https://github.com/nhatminh-hoang/CoralMonSter",
-    "logo": "static/images/favicon.ico"
+    "logo": "static/images/logo.png"
   }
   </script>
 </head>
@@ -199,8 +199,11 @@
       <div class="hero-body">
         <div class="container is-max-desktop">
           <div class="columns is-centered">
-            <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title">CoralMonSter: Coral Image Momentum Segmenter</h1>
+              <div class="column has-text-centered">
+                <div class="logo-wrapper" style="margin-bottom: 1.5rem;">
+                  <img src="static/images/logo.png" alt="CoralMonSter Logo" style="max-height: 150px; width: auto;" />
+                </div>
+                <h1 class="title is-1 publication-title">CoralMonSter: Coral Image Momentum Segmenter</h1>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
                   <a href="#" target="_blank">Nhat-Minh Hoang</a><sup>1,†</sup>,</span>
@@ -262,11 +265,8 @@
     <section class="hero teaser">
       <div class="container is-max-desktop">
         <div class="hero-body">
-          <!-- TODO: Replace with your teaser video -->
-          <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-            <!-- TODO: Add your video file path here -->
-            <source src="static/videos/banner_video.mp4" type="video/mp4">
-          </video>
+          <img src="static/images/framework_architecture.png" alt="Proposed CoralMonSter Framework Architecture"
+            class="publication-image" style="width: 100%; border-radius: var(--border-radius-lg);" />
           <!-- TODO: Replace with your video description -->
           <h2 class="subtitle has-text-centered">
             CoralMonSter bridges the gap between SAM's class-agnostic segmentation and the need for semantic
@@ -379,16 +379,6 @@
                 learnable class-specific queries.
                 The model is trained using a <strong>Momentum Distillation</strong> strategy, in which an Exponential
                 Moving Average (EMA) teacher provides prompt-based guidance derived from ground-truth annotations.
-              </p>
-              <img src="static/images/framework_architecture.png" alt="CoralMonSter Architecture"
-                class="publication-image" />
-              <p class="is-size-6">
-                <strong>Proposed CoralMonSter framework.</strong> The architecture consists of an Image Encoder
-                initialized from SAM.
-                We introduce a dual-decoder distillation setup: a prompt-free Student Decoder and a privileged Teacher
-                Decoder.
-                The Teacher receives privileged ground-truth prompts to generate high-fidelity oracle masks, which the
-                Student learns to mimic via Mask and Token Distillation.
               </p>
             </div>
           </div>
