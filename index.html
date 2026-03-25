@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Primary Meta Tags -->
-  <meta name="title" content="CoralMonSter: Coral Image Momentum Segmenter">
+  <meta name="title"
+    content="CoralMonSter: Prompt-Free Segment Anything via Momentum Distillation for Automated Coral Reef Monitoring">
   <meta name="description"
     content="CoralMonSter is a premium, prompt-free coral reef segmentation framework leveraging Teacher-Student Distillation and Learnable Class Tokens for state-of-the-art semantic segmentation.">
   <meta name="keywords"
@@ -18,7 +19,8 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="CoralMonSter Project">
-  <meta property="og:title" content="CoralMonSter: Coral Image Momentum Segmenter">
+  <meta property="og:title"
+    content="CoralMonSter: Prompt-Free Segment Anything via Momentum Distillation for Automated Coral Reef Monitoring">
   <meta property="og:description"
     content="CoralMonSter is a premium, prompt-free coral reef segmentation framework leveraging Teacher-Student Distillation and Learnable Class Tokens.">
   <meta property="og:url" content="https://nhatminh-hoang.github.io/CoralMonSter/">
@@ -35,7 +37,8 @@
 
 
   <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="CoralMonSter: Coral Image Momentum Segmenter">
+  <meta name="citation_title"
+    content="CoralMonSter: Prompt-Free Segment Anything via Momentum Distillation for Automated Coral Reef Monitoring">
   <meta name="citation_author" content="Hoang, Nhat Minh">
   <meta name="citation_publication_date" content="2024">
   <meta name="citation_conference_title" content="Preprint">
@@ -55,7 +58,8 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
 
-  <title>CoralMonSter: Coral Image Momentum Segmenter</title>
+  <title>CoralMonSter: Prompt-Free Segment Anything via Momentum Distillation for Automated Coral Reef Monitoring
+  </title>
 
   <!-- Favicon and App Icons -->
   <link rel="icon" type="image/png" href="static/images/logo.png">
@@ -98,7 +102,7 @@
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "CoralMonSter: Coral Image Momentum Segmenter",
+    "headline": "CoralMonSter: Prompt-Free Segment Anything via Momentum Distillation for Automated Coral Reef Monitoring",
     "description": "CoralMonSter is a premium, prompt-free coral reef segmentation framework built on top of Segment Anything (SAM).",
     "author": [
       {
@@ -199,11 +203,12 @@
       <div class="hero-body">
         <div class="container is-max-desktop">
           <div class="columns is-centered">
-              <div class="column has-text-centered">
-                <div class="logo-wrapper" style="margin-bottom: 1.5rem;">
-                  <img src="static/images/logo.png" alt="CoralMonSter Logo" style="max-height: 150px; width: auto;" />
-                </div>
-                <h1 class="title is-1 publication-title">CoralMonSter: Coral Image Momentum Segmenter</h1>
+            <div class="column has-text-centered">
+              <div class="logo-wrapper" style="margin-bottom: 1.5rem;">
+                <img src="static/images/logo.png" alt="CoralMonSter Logo" style="max-height: 150px; width: auto;" />
+              </div>
+              <h1 class="title is-1 publication-title">CoralMonSter: Prompt-Free Segment Anything via Momentum
+                Distillation for Automated Coral Reef Monitoring</h1>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
                   <a href="#" target="_blank">Nhat-Minh Hoang</a><sup>1,†</sup>,</span>
@@ -261,13 +266,28 @@
     </section>
 
 
-    <!-- Teaser video-->
+    <!-- Teaser video -->
     <section class="hero teaser">
       <div class="container is-max-desktop">
         <div class="hero-body">
-          <img src="static/images/framework_architecture.png" alt="Proposed CoralMonSter Framework Architecture"
-            class="publication-image" style="width: 100%; border-radius: var(--border-radius-lg);" />
-          <!-- TODO: Replace with your video description -->
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <div class="publication-video">
+                <iframe src="https://www.youtube.com/embed/l0ksLYmMHZk"
+                  title="CoralMonSter Sample Video 1" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="publication-video">
+                <iframe src="https://www.youtube.com/embed/-ZxKUvDbyB8"
+                  title="CoralMonSter Sample Video 2" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
           <h2 class="subtitle has-text-centered">
             CoralMonSter bridges the gap between SAM's class-agnostic segmentation and the need for semantic
             understanding in coral ecology, achieving state-of-the-art results on HKCoral benchmark.
@@ -345,25 +365,7 @@
 
 
 
-    <!-- Youtube video -->
-    <!--
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-    <!-- End youtube video -->
+
 
     <!-- Method Section -->
     <section class="section">
@@ -380,6 +382,8 @@
                 The model is trained using a <strong>Momentum Distillation</strong> strategy, in which an Exponential
                 Moving Average (EMA) teacher provides prompt-based guidance derived from ground-truth annotations.
               </p>
+              <img src="static/images/framework_architecture.png" alt="Proposed CoralMonSter Framework Architecture"
+                class="publication-image" style="width: 100%; border-radius: var(--border-radius-lg);" />
             </div>
           </div>
         </div>
@@ -556,7 +560,7 @@
                 This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
                   target="_blank">Academic Project Page Template</a> which was adopted from the <a
                   href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-                 <br> This website is licensed under a <a rel="license"
+                <br> This website is licensed under a <a rel="license"
                   href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
                   Commons Attribution-ShareAlike 4.0 International License</a>.
               </p>
