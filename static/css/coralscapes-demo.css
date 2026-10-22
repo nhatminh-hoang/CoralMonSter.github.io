@@ -1,0 +1,64 @@
+/* Self-contained CoralScapes V1 segmentation explorer styles */
+.coral-demo-section {
+  background: linear-gradient(180deg, #f6fbfc 0%, #ecf8f6 100%);
+  border-top: 1px solid #d9ece9;
+  border-bottom: 1px solid #d9ece9;
+}
+.coral-demo { max-width: 1120px; margin: 0 auto; color: #143936; }
+.coral-demo__heading { max-width: 760px; margin: 0 auto 1.75rem; text-align: center; }
+.coral-demo__eyebrow { margin-bottom: .55rem; color: #167b70; font-weight: 800; letter-spacing: .13em; font-size: .72rem; text-transform: uppercase; }
+.coral-demo__heading h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); color: #123e3a; margin: 0 0 .7rem; font-weight: 800; line-height: 1.25; }
+.coral-demo__heading p:last-child { color: #577370; margin: 0; line-height: 1.6; }
+.coral-demo__card { padding: 1.1rem; background: white; border: 1px solid #d9ebe8; border-radius: 22px; box-shadow: 0 16px 48px rgba(22,77,66,.08); }
+.coral-demo__body { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 1.25rem; align-items: start; }
+.coral-demo__visualization { min-width: 0; }
+.coral-demo__topline { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .65rem; padding: .35rem .35rem 1rem; }
+.coral-demo__counter { font-weight: 700; font-size: .92rem; color: #294e4a; }
+.coral-demo__viewer { --reveal: 50%; position: relative; aspect-ratio: 2/1; background: #102f35; border-radius: 14px; overflow: hidden; touch-action: none; outline-offset: 4px; user-select: none; }
+.coral-demo__viewer:focus-visible { outline: 3px solid #18a995; }
+.coral-demo__viewer img, .coral-demo__viewer canvas { position: absolute; width: 100%; height: 100%; inset: 0; object-fit: contain; display: block; pointer-events: none; }
+.coral-demo__viewer canvas { clip-path: inset(0 0 0 50%); }
+.coral-demo__viewer.is-loading::after { content: "Loading annotation…"; position: absolute; inset: 0; display: grid; place-items: center; color: white; background: rgba(4,32,36,.56); font-weight: 700; z-index: 3; }
+.coral-demo__side { position: absolute; z-index: 2; top: .85rem; border-radius: 40px; padding: .3rem .65rem; background: rgba(10,40,44,.66); backdrop-filter: blur(4px); color: white; font-size: .75rem; font-weight: 700; pointer-events: none; }
+.coral-demo__side--rgb { left: .9rem; }
+.coral-demo__side--mask { right: .9rem; }
+.coral-demo__divider { position: absolute; z-index: 2; top: 0; bottom: 0; left: var(--reveal); width: 2px; background: white; box-shadow: 0 0 0 1px rgba(0,0,0,.14); transform: translateX(-50%); cursor: ew-resize; }
+.coral-demo__divider::before { content: ""; position: absolute; inset: 0 -10px; }
+.coral-demo__handle { position: absolute; top: 50%; left: var(--reveal); z-index: 2; transform: translate(-50%,-50%); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: white; color: #23675e; border: 4px solid rgba(41,165,147,.7); box-shadow: 0 5px 22px #001e2850; font-weight: 800; letter-spacing: -.12em; padding-right: .15em; cursor: ew-resize; }
+.coral-demo__status { min-height: 1.6rem; margin: .7rem .2rem .6rem; color: #567571; font-size: .81rem; }
+.coral-demo__status.is-error { color: #ba4848; }
+.coral-demo__retry { border: 1px solid #c1e2dc; background: #f4fffc; color: #146e60; border-radius: 9px; font-weight: 700; padding: .5rem .85rem; margin-bottom: .6rem; cursor: pointer; }
+.coral-demo__controls { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; }
+.coral-demo__labels { display: flex; flex-direction: column; gap: .48rem; }
+.coral-demo__label { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid #d3e4e2; background: #f9fcfb; color: #365853; border-radius: 100px; padding: .58rem .84rem; font-size: .84rem; font-weight: 700; transition: background .15s, border-color .15s; cursor: pointer; }
+.coral-demo__label:hover, .coral-demo__label:focus-visible { border-color: #31998a; }
+.coral-demo__label.is-selected { background: #e8f7f3; border-color: #239783; color: #0c6657; box-shadow: 0 0 0 1px #239783; }
+.coral-demo__dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.coral-demo__dot--alive { background: #29d6a9; }
+.coral-demo__dot--dead { background: #ff965b; }
+.coral-demo__dot--bleached { background: #f974b6; }
+.coral-demo__opacity { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; font-size: .78rem; font-weight: 700; color: #5d746f; }
+.coral-demo__opacity input { width: 125px; accent-color: #1aa790; }
+.coral-demo__coverage { margin: .35rem .25rem 1rem; color: #607672; font-size: .79rem; min-height: 1.3rem; }
+.coral-demo__gallery-caption { display: flex; align-items: center; justify-content: space-between; margin: .9rem .2rem .6rem; font-size: .79rem; font-weight: 700; color: #5a7772; gap: .5rem; }
+.coral-demo__thumbnails { display: grid; grid-template-columns: repeat(10,minmax(0,1fr)); gap: .5rem; }
+.coral-demo__thumb { position: relative; min-width: 0; padding: 0; border: 2px solid transparent; border-radius: 9px; overflow: hidden; background: #dceae7; cursor: pointer; aspect-ratio: 1.42; }
+.coral-demo__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.coral-demo__thumb span { position: absolute; left: .2rem; bottom: .2rem; padding: .06rem .3rem; border-radius: 5px; color: white; background: rgba(5,33,36,.7); font-size: .68rem; font-weight: 800; }
+.coral-demo__thumb:hover { border-color: #5bb8a7; }
+.coral-demo__thumb.is-selected { border-color: #168e7d; box-shadow: 0 0 0 1px #168e7d; }
+@media (max-width: 760px) {
+  .coral-demo__card { padding: .7rem; border-radius: 15px; }
+  .coral-demo__body { grid-template-columns: minmax(0,1fr); gap: .75rem; }
+  .coral-demo__labels { flex-direction: row; flex-wrap: wrap; }
+  .coral-demo__thumbnails { grid-template-columns: repeat(5,minmax(0,1fr)); }
+  .coral-demo__side { font-size: .65rem; top: .5rem; padding: .2rem .42rem; }
+  .coral-demo__side--rgb { left: .5rem; }
+  .coral-demo__side--mask { right: .5rem; }
+  .coral-demo__handle { height: 36px; width: 36px; border-width: 3px; }
+  .coral-demo__label { font-size: .76rem; padding: .5rem .66rem; }
+  .coral-demo__controls { align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coral-demo__label { transition: none; }
+}
