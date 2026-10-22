@@ -68,6 +68,7 @@
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/coralscapes-demo.css">
 
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style"
@@ -96,6 +97,7 @@
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
+  <script defer src="static/js/coralscapes-demo.js"></script>
 
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
@@ -471,6 +473,73 @@
       </div>
     </section>
     <!-- End Results Section -->
+
+    <!-- CoralScapes V1 ground-truth interactive demo -->
+    <section class="section coral-demo-section" id="coralscapes-demo" aria-labelledby="coral-demo-title">
+      <div class="container coral-demo">
+        <div class="coral-demo__heading">
+          <p class="coral-demo__eyebrow">Interactive dataset explorer</p>
+          <h2 id="coral-demo-title">Explore coral health, pixel by pixel</h2>
+          <p>Move your cursor or drag the comparison handle to reveal the semantic mask.
+            Select a class to highlight only living, dead, or bleached coral annotations.</p>
+        </div>
+
+        <div class="coral-demo__card">
+          <div class="coral-demo__topline">
+            <span class="coral-demo__counter" data-demo-counter>10 CoralScapes examples</span>
+            <span class="coral-demo__tag">CoralScapes V1 · Ground truth</span>
+          </div>
+          <div class="coral-demo__viewer" data-demo-viewer role="slider" tabindex="0"
+            aria-label="RGB versus segmentation mask comparison position"
+            aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal"
+            aria-describedby="coral-demo-instructions">
+            <img data-demo-rgb alt="An underwater CoralScapes validation image" />
+            <canvas data-demo-mask aria-hidden="true"></canvas>
+            <span class="coral-demo__side coral-demo__side--rgb">RGB image</span>
+            <span class="coral-demo__side coral-demo__side--mask">Ground-truth mask</span>
+            <span class="coral-demo__divider" aria-hidden="true"></span>
+            <span class="coral-demo__handle" aria-hidden="true">‹ ›</span>
+          </div>
+          <p id="coral-demo-instructions" class="coral-demo__status" data-demo-status role="status" aria-live="polite">
+            Connecting to CoralScapes…
+          </p>
+          <button type="button" class="coral-demo__retry" data-demo-retry hidden>Reload dataset</button>
+
+          <div class="coral-demo__controls">
+            <div class="coral-demo__labels" role="group" aria-label="Select highlighted coral label">
+              <button type="button" class="coral-demo__label is-selected" data-coral-label="all" aria-pressed="true">All coral</button>
+              <button type="button" class="coral-demo__label" data-coral-label="alive" aria-pressed="false">
+                <span class="coral-demo__dot coral-demo__dot--alive" aria-hidden="true"></span>Coral alive
+              </button>
+              <button type="button" class="coral-demo__label" data-coral-label="dead" aria-pressed="false">
+                <span class="coral-demo__dot coral-demo__dot--dead" aria-hidden="true"></span>Coral dead
+              </button>
+              <button type="button" class="coral-demo__label" data-coral-label="bleached" aria-pressed="false">
+                <span class="coral-demo__dot coral-demo__dot--bleached" aria-hidden="true"></span>Coral bleached
+              </button>
+            </div>
+            <label class="coral-demo__opacity">
+              Overlay opacity
+              <input type="range" min="0" max="100" step="5" value="72" data-demo-opacity aria-label="Mask overlay opacity">
+              <span data-demo-opacity-value>72%</span>
+            </label>
+          </div>
+          <p class="coral-demo__coverage" data-demo-coverage>Select an image to inspect its masks.</p>
+          <div class="coral-demo__gallery-caption">
+            <span>Explore 10 image–annotation pairs</span>
+            <span>Reveal position: <span data-demo-position>50%</span></span>
+          </div>
+          <div class="coral-demo__thumbnails" data-demo-thumbnails aria-label="CoralScapes sample gallery"></div>
+          <p class="coral-demo__source">Visualization of <strong>human-annotated ground truth</strong>, not CoralMonSter predictions.
+            Original 39-class taxonomy grouped into three coral-health categories; non-coral and unannotated pixels remain transparent.
+            Source: <a href="https://huggingface.co/datasets/EPFL-ECEO/coralscapes" target="_blank" rel="noopener noreferrer">CoralScapes (EPFL-ECEO)</a>,
+            Apache 2.0. Keyboard: focus the image and use ← / → to adjust the split.</p>
+        </div>
+      </div>
+    </section>
+    <!-- End CoralScapes interactive demo -->
+
+
 
 
     <!-- Video carousel -->
