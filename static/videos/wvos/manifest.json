@@ -1,0 +1,69 @@
+{
+  "clips": [
+    {
+      "id": "video1",
+      "title": "Fish",
+      "src": "static/videos/wvos/video1.mp4",
+      "poster": "static/videos/wvos/video1-poster.jpg",
+      "annotations": "static/videos/wvos/video1.json",
+      "fps": 24,
+      "frameCount": 407,
+      "sourceWidth": 1920,
+      "sourceHeight": 1080,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video5",
+      "title": "Dolphin",
+      "src": "static/videos/wvos/video5.mp4",
+      "poster": "static/videos/wvos/video5-poster.jpg",
+      "annotations": "static/videos/wvos/video5.json",
+      "fps": 24,
+      "frameCount": 271,
+      "sourceWidth": 480,
+      "sourceHeight": 852,
+      "width": 480,
+      "height": 852
+    },
+    {
+      "id": "video7",
+      "title": "Clownfish",
+      "src": "static/videos/wvos/video7.mp4",
+      "poster": "static/videos/wvos/video7-poster.jpg",
+      "annotations": "static/videos/wvos/video7.json",
+      "fps": 24,
+      "frameCount": 438,
+      "sourceWidth": 3840,
+      "sourceHeight": 2160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video24",
+      "title": "Shark",
+      "src": "static/videos/wvos/video24.mp4",
+      "poster": "static/videos/wvos/video24-poster.jpg",
+      "annotations": "static/videos/wvos/video24.json",
+      "fps": 24,
+      "frameCount": 329,
+      "sourceWidth": 1920,
+      "sourceHeight": 1080,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video45",
+      "title": "Turtle",
+      "src": "static/videos/wvos/video45.mp4",
+      "poster": "static/videos/wvos/video45-poster.jpg",
+      "annotations": "static/videos/wvos/video45.json",
+      "fps": 24,
+      "frameCount": 191,
+      "sourceWidth": 3840,
+      "sourceHeight": 2160,
+      "width": 1280,
+      "height": 720
+    }
+  ]
+}

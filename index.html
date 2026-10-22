@@ -69,6 +69,7 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/coralscapes-demo.css">
+  <link rel="stylesheet" href="static/css/wvos-demo.css">
 
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style"
@@ -98,6 +99,7 @@
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
   <script defer src="static/js/coralscapes-demo.js"></script>
+  <script defer src="static/js/wvos-demo.js"></script>
 
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
@@ -588,6 +590,59 @@
     </section>
     <!--End BibTex citation -->
 
+
+    <section class="section wvos-section" id="wvos-demo" aria-labelledby="wvos-title">
+      <div class="container wvos-demo" data-wvos-root data-manifest="static/videos/wvos/manifest.json">
+        <div class="wvos-demo__heading">
+          <p class="wvos-demo__eyebrow">Interactive video annotations</p>
+          <h2 id="wvos-title">Follow marine life, frame by frame</h2>
+          <p>Explore five WVOS sequences with their supplied object annotations.
+            Drag the handle to compare RGB video with the annotated view.</p>
+        </div>
+        <div class="wvos-demo__card">
+          <div class="wvos-demo__body">
+            <aside class="wvos-demo__sidebar">
+              <label for="wvos-clip">Choose a sequence</label>
+              <select id="wvos-clip" data-wvos-select disabled aria-label="WVOS sequence">
+                <option>Loading sequences…</option>
+              </select>
+              <button type="button" class="wvos-demo__view" data-wvos-view disabled>Show full annotation</button>
+              <p class="wvos-demo__legend-title">Annotated objects</p>
+              <ul class="wvos-demo__legend" data-wvos-legend aria-label="Object colors"></ul>
+              <p class="wvos-demo__note">Supplied WVOS annotations.<br>24 FPS preview timing.</p>
+            </aside>
+            <div class="wvos-demo__main">
+              <div class="wvos-demo__stage">
+                <div class="wvos-demo__viewer" data-wvos-viewer data-ready="false" aria-busy="true">
+                  <video data-wvos-video preload="none" playsinline muted loop aria-label="Selected WVOS RGB video"></video>
+                  <canvas data-wvos-overlay aria-hidden="true"></canvas>
+                  <span class="wvos-demo__side wvos-demo__side--rgb" data-wvos-rgb-label>RGB video</span>
+                  <span class="wvos-demo__side wvos-demo__side--annotation" data-wvos-annotation-label>WVOS annotation</span>
+                  <div class="wvos-demo__divider" data-wvos-handle role="slider" tabindex="-1"
+                    aria-label="RGB and annotation comparison position" aria-orientation="horizontal"
+                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-disabled="true"
+                    aria-describedby="wvos-instructions">
+                    <span class="wvos-demo__grip" aria-hidden="true">‹ ›</span>
+                  </div>
+                </div>
+              </div>
+              <div class="wvos-demo__controls">
+                <button type="button" data-wvos-play disabled>Play</button>
+                <output data-wvos-frame>Frame 0</output>
+              </div>
+              <div class="wvos-demo__timeline">
+                <input type="range" min="0" max="1" step="0.001" value="0" data-wvos-timeline disabled aria-label="Video timeline">
+                <output data-wvos-time>0:00 / 0:00</output>
+              </div>
+              <p id="wvos-instructions" class="wvos-demo__note">Drag the handle, or focus it and use the arrow keys.
+                Home shows annotation. End shows RGB. Playback loops.</p>
+              <p class="wvos-demo__status" data-wvos-status role="status" aria-live="polite">The preview loads when you reach this section.</p>
+              <button type="button" class="wvos-demo__retry" data-wvos-retry hidden>Retry loading</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="container">
