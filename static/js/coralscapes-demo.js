@@ -5,7 +5,6 @@
   const root = document.getElementById('coralscapes-demo');
   if (!root) return;
 
-  const DATASET = 'EPFL-ECEO/coralscapes';
   const SAMPLE_INDICES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
   const GROUPS = {
     alive: {
@@ -24,26 +23,11 @@
       color: [249, 116, 182]
     }
   };
-  // Exact color values from the official 39-class CoralScapes V1 palette.
-  // Some image decoders expose the palette RGB; others expose grayscale class IDs.
-  const PALETTE = {
-    3: [114, 60, 61], 4: [250, 224, 225], 6: [224, 118, 119],
-    16: [255, 248, 228], 17: [236, 150, 21], 19: [252, 231, 240],
-    20: [123, 50, 86], 21: [244, 150, 115], 22: [226, 91, 157],
-    23: [134, 86, 18], 25: [236, 128, 255], 27: [228, 255, 119],
-    28: [189, 119, 255], 31: [255, 146, 150], 32: [85, 53, 116],
-    33: [251, 243, 216], 34: [255, 111, 194], 36: [230, 193, 0],
-    37: [119, 100, 14]
-  };
-
   const groupCode = { alive: 1, dead: 2, bleached: 3 };
   const idToCode = new Uint8Array(256);
-  const paletteToCode = new Map();
   Object.keys(GROUPS).forEach(function (key) {
     GROUPS[key].ids.forEach(function (id) {
       idToCode[id] = groupCode[key];
-      const color = PALETTE[id];
-      if (color) paletteToCode.set(color.join(','), groupCode[key]);
     });
   });
 
@@ -85,18 +69,11 @@
     positionText.textContent = Math.round(reveal) + '%';
   }
 
-  function readGroup(r, g, b) {
-    if (r <= 39 && g === r && b === r) return idToCode[r];
-    if (r <= 39 && g === 0 && b === 0) return idToCode[r];
-    return paletteToCode.get(r + ',' + g + ',' + b) || 0;
-  }
-
   function loadImage(url) {
     return new Promise(function (resolve, reject) {
       const image = new Image();
-      image.crossOrigin = 'anonymous';
       image.onload = function () { resolve(image); };
-      image.onerror = function () { reject(new Error('Could not load a CoralScapes image or mask.')); };
+      image.onerror = function () { reject(new Error('Could not load a local CoralScapes image or mask.')); };
       image.src = url;
     });
   }
@@ -177,6 +154,7 @@
     counter.textContent = 'Sample ' + String(index + 1).padStart(2, '0') + ' / ' + samples.length +
       ' · validation row ' + sample.index;
     viewer.classList.add('is-loading');
+    retryButton.hidden = true;
     pixels = null;
     rgbImage.removeAttribute('src');
     maskCanvas.getContext('2d').clearRect(0, 0, maskCanvas.width, maskCanvas.height);
@@ -206,7 +184,7 @@
       const decoded = new Uint8Array(maskWidth * maskHeight);
       const newCounts = [0, 0, 0, 0];
       for (let pixel = 0, byte = 0; pixel < decoded.length; pixel++, byte += 4) {
-        const code = readGroup(raw[byte], raw[byte + 1], raw[byte + 2]);
+        const code = idToCode[raw[byte]];
         decoded[pixel] = code;
         newCounts[code]++;
       }
@@ -217,49 +195,25 @@
       maskCanvas.width = maskWidth;
       maskCanvas.height = maskHeight;
       drawOverlay();
-      setStatus('Ground-truth overlay ready. Move or drag over the image to compare.');
+      setStatus('Ground-truth overlay ready. Click and drag the divider to compare.');
     } catch (error) {
       if (version !== loadVersion) return;
       console.error('CoralScapes demo:', error);
-      setStatus('Could not decode this pair. Try another sample or reload the dataset. ' +
-        '(Remote images must allow cross-origin canvas access.)', true);
+      setStatus('Could not display this local image–mask pair. Try again or choose another sample.', true);
+      retryButton.hidden = false;
     } finally {
       if (version === loadVersion) viewer.classList.remove('is-loading');
     }
   }
 
-  async function initialize() {
-    ++loadVersion;
+  function initialize() {
     retryButton.hidden = true;
-    setStatus('Fetching 10 paired CoralScapes validation examples…');
-    try {
-      const url = new URL('https://datasets-server.huggingface.co/rows');
-      url.searchParams.set('dataset', DATASET);
-      url.searchParams.set('config', 'default');
-      url.searchParams.set('split', 'validation');
-      url.searchParams.set('offset', '0');
-      url.searchParams.set('length', '100');
-
-      // The endpoint generates fresh, short-lived image URLs on each page load.
-      const response = await fetch(url.toString(), { cache: 'no-store' });
-      if (!response.ok) throw new Error('Dataset viewer returned HTTP ' + response.status);
-      const dataset = await response.json();
-      const available = new Map((dataset.rows || []).map(function (item) {
-        return [item.row_idx, item.row];
-      }));
-      samples = SAMPLE_INDICES.map(function (index) {
-        const row = available.get(index);
-        return row && row.image && row.label && row.image.src && row.label.src
-          ? { index: index, image: row.image, label: row.label } : null;
-      }).filter(Boolean);
-      if (samples.length !== 10) throw new Error('Fewer than 10 image–mask pairs were available.');
-      renderThumbnails();
-      await selectSample(0);
-    } catch (error) {
-      console.error('CoralScapes dataset fetch:', error);
-      setStatus('The CoralScapes dataset service is unavailable. Reload the dataset to try again.', true);
-      retryButton.hidden = false;
-    }
+    samples = SAMPLE_INDICES.map(function (index) {
+      const prefix = 'static/images/coralscapes/validation-' + String(index).padStart(3, '0');
+      return { index: index, image: { src: prefix + '-image.png' }, label: { src: prefix + '-mask.png' } };
+    });
+    renderThumbnails();
+    selectSample(0);
   }
 
   function updatePointer(event) {
@@ -268,15 +222,17 @@
   }
 
   viewer.addEventListener('pointerdown', function (event) {
+    if (event.button !== 0 || !event.target.closest('[data-demo-drag]')) return;
     dragging = true;
     viewer.setPointerCapture(event.pointerId);
     updatePointer(event);
   });
   viewer.addEventListener('pointermove', function (event) {
-    if (dragging || event.pointerType === 'mouse') updatePointer(event);
+    if (dragging) updatePointer(event);
   });
   viewer.addEventListener('pointerup', function () { dragging = false; });
   viewer.addEventListener('pointercancel', function () { dragging = false; });
+  viewer.addEventListener('lostpointercapture', function () { dragging = false; });
   viewer.addEventListener('keydown', function (event) {
     let next = reveal;
     if (event.key === 'ArrowLeft') next -= 5;
@@ -297,7 +253,7 @@
     opacityText.textContent = opacityInput.value + '%';
     drawOverlay();
   });
-  retryButton.addEventListener('click', initialize);
+  retryButton.addEventListener('click', function () { selectSample(selectedIndex); });
   setReveal(50);
   setGroup('all');
   initialize();
